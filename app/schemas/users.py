@@ -1,7 +1,6 @@
 from datetime import datetime
-from typing import Any, List, Optional
+from typing import Optional
 
-from pydantic import BaseModel
 from sqlmodel import SQLModel
 
 from app.models.user import RoleEnum
@@ -33,13 +32,3 @@ class UserUpdate(SQLModel):
     last_name: Optional[str] = None
     role: Optional[RoleEnum] = None
     active: Optional[bool] = None
-
-
-class PaginatedResponse(BaseModel):
-    status: str
-    data: List[Any]
-    total: int
-    page: int
-    limit: int
-    message: Optional[str]
-    response_time: datetime

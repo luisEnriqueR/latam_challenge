@@ -1,0 +1,33 @@
+.dockerignore
+Dockerfile*
+
+# Python cache and virtual environment
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+
+# IDE and OS files
+.idea/
+.vscode/
+*.DS_Store
+
+# Secrets (should be managed via Secret Manager or env vars in Cloud Run)
+.env*
+*.env
+
+# Test files (optional, unless needed at runtime)
+tests/
+*.test.py
+pytest.ini
+.coverage
+htmlcov/
+
+# Other build artifacts or local files
+dist/
+build/
+*.egg-info/
+*.log

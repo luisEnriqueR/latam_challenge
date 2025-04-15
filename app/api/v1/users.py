@@ -4,12 +4,14 @@ from fastapi import APIRouter, Depends, Query, status
 from sqlmodel import Session
 
 from app.database.database import get_session
-from app.schemas.common import APIResponse
-from app.schemas.user import PaginatedResponse, UserCreate
+from app.schemas.common import APIResponse, PaginatedResponse
+from app.schemas.users import UserCreate, UserUpdate
 from app.services.users import (
     create_user,
+    delete_user,
     get_user_by_id,
     get_users_paginated,
+    update_user,
 )
 
 router = APIRouter()
@@ -23,7 +25,9 @@ router = APIRouter()
 def create_user_endpoint(
     user_create: UserCreate, session: Session = Depends(get_session)
 ):
+    print("Se hace la peticion\n\n")
     user = create_user(user_create, session)
+    print(f"el user resultado {user}")
     return APIResponse(
         status="success",
         data=user.model_dump(),
@@ -57,5 +61,34 @@ def list_users(
         page=page,
         limit=limit,
         message="Users fetched successfully.",
+        response_time=datetime.now(),
+    )
+
+
+@router.put("/{user_id}", response_model=APIResponse)
+def update_user_fields(
+    user_id: int,
+    update_data: UserUpdate,
+    session: Session = Depends(get_session),
+):
+    user = update_user(user_id, update_data, session)
+    return APIResponse(
+        status="success",
+        data=user.model_dump(),
+        message="User updated successfully.",
+        response_time=datetime.now(),
+    )
+
+
+@router.delete("/{user_id}", response_model=APIResponse)
+def delete_user_endpoint(
+    user_id: int, session: Session = Depends(get_session)
+):
+    delete_user(user_id, session)
+
+    return APIResponse(
+        status="success",
+        data=None,
+        message=f"User with ID {user_id} deleted successfully.",
         response_time=datetime.now(),
     )

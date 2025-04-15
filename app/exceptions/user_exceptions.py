@@ -16,3 +16,11 @@ class UsernameAlreadyExists(AppException):
 class EmailAlreadyExists(AppException):
     def __init__(self, message="Email already exists"):
         super().__init__(message=message, status_code=409)
+
+
+class NoFieldsToUpdate(AppException):
+    def __init__(self):
+        super().__init__(
+            message="No valid fields were provided to update.",
+            status_code=400,
+        )
