@@ -9,8 +9,11 @@ from app.core.exception_handler import (
     exception_handler,
     validation_exception_handler,
 )
+from app.core.logging_config import setup_logging
 from app.database.init_db import init_db
 from app.exceptions.app_exceptions import AppException
+
+setup_logging()
 
 
 @asynccontextmanager
@@ -32,4 +35,4 @@ def handle_422(request, exc):
     return validation_exception_handler(request, exc)
 
 
-app.include_router(users.router, prefix="/api/v1")
+app.include_router(users.router, prefix="/api/v1/users")
