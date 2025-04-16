@@ -3,4 +3,5 @@ pydantic-settings
 python-dotenv
 sqlmodel
 uvicorn
-mysqlclient
+psycopg2-binary
+google-cloud-secret-manager

@@ -25,9 +25,7 @@ router = APIRouter()
 def create_user_endpoint(
     user_create: UserCreate, session: Session = Depends(get_session)
 ):
-    print("Se hace la peticion\n\n")
     user = create_user(user_create, session)
-    print(f"el user resultado {user}")
     return APIResponse(
         status="success",
         data=user.model_dump(),
