@@ -1,6 +1,7 @@
 from datetime import datetime
 from typing import Optional
 
+from pydantic import EmailStr
 from sqlmodel import SQLModel
 
 from app.models.user import RoleEnum
@@ -8,7 +9,7 @@ from app.models.user import RoleEnum
 
 class UserCreate(SQLModel):
     username: str
-    email: str
+    email: EmailStr
     first_name: str
     last_name: str
     role: RoleEnum
@@ -18,7 +19,7 @@ class UserCreate(SQLModel):
 class UserRead(SQLModel):
     id: int
     username: str
-    email: str
+    email: EmailStr
     first_name: str
     last_name: str
     role: RoleEnum

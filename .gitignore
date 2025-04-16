@@ -175,3 +175,5 @@ cython_debug/
 
 # SQLite db (development only)
 app.db
+.gcloudignore
+app.yaml

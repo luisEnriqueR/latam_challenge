@@ -4,7 +4,6 @@ from fastapi import FastAPI
 from fastapi.exceptions import RequestValidationError
 
 from app.api.v1 import users
-from app.core.config import settings
 from app.core.exception_handler import (
     exception_handler,
     validation_exception_handler,
@@ -22,7 +21,9 @@ async def lifespan(app: FastAPI):
     yield
 
 
-app = FastAPI(title=settings.APP_NAME, lifespan=lifespan)
+app = FastAPI(
+    title="Latam Airlines Code Challenge", lifespan=lifespan
+)
 
 
 @app.exception_handler(AppException)
